@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedro Domingues — Desenvolvedor & IA</title>
+<meta name="description" content="Estudante de Ciência da Computação. IA, automação e desenvolvimento full-stack.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F5F4F0;
+  --ink: #1a1a1a;
+  --muted: #71716b;
+  --accent: #1B7A5A;
+  --accent-hover: #15634A;
+  --accent-soft: #d9efe6;
+  --surface: #EDECE8;
+  --white: #FDFCFA;
+  --border: #D6D4CE;
+  --display: 'Outfit', sans-serif;
+  --body: 'DM Sans', sans-serif;
+  --mono: 'Source Code Pro', monospace;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+.wrap { max-width: 820px; margin: 0 auto; padding: 0 24px; }
+
+.topbar { height: 3px; background: var(--accent); }
+
+.nav { padding: 20px 0; border-bottom: 1px solid var(--border); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; }
+.nav-name {
+  font-family: var(--display); font-weight: 600; font-size: 15px;
+  letter-spacing: -0.01em; text-decoration: none; color: var(--ink);
+}
+.nav-links { display: flex; gap: 24px; list-style: none; }
+.nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+.nav-links a:hover { color: var(--ink); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle svg { width: 22px; height: 22px; color: var(--ink); }
+
+.hero { padding: 72px 0 64px; }
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 700; line-height: 1.05;
+  letter-spacing: -0.035em; margin-bottom: 28px;
+}
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero-bio {
+  font-size: 17px; color: var(--muted);
+  max-width: 560px; line-height: 1.7; margin-bottom: 28px;
+}
+.hero-bio strong { color: var(--ink); font-weight: 500; }
+.hero-contact { display: flex; gap: 20px; flex-wrap: wrap; align-items: center; }
+.hero-contact a {
+  font-size: 14px; font-weight: 500; color: var(--accent);
+  text-decoration: none; display: inline-flex; align-items: center;
+  gap: 6px; transition: color 0.15s;
+}
+.hero-contact a:hover { color: var(--accent-hover); }
+.hero-contact svg { width: 15px; height: 15px; flex-shrink: 0; }
+.hero-contact .sep { width: 3px; height: 3px; background: var(--border); border-radius: 50%; }
+
+.section { padding: 56px 0; border-top: 1px solid var(--border); }
+.section-head {
+  font-family: var(--display); font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--muted); margin-bottom: 32px;
+}
+
+.project-list { list-style: none; }
+.project-item {
+  display: block; text-decoration: none; color: inherit;
+  padding: 20px 0; border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.project-item:first-child { border-top: 1px solid var(--border); }
+.project-item:hover { background: var(--surface); margin: 0 -16px; padding: 20px 16px; border-radius: 6px; }
+.project-top {
+  display: flex; align-items: baseline;
+  justify-content: space-between; gap: 16px; margin-bottom: 4px;
+}
+.project-name { font-family: var(--display); font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+.project-tags { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+.project-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.project-arrow { display: inline-block; margin-left: 4px; transition: transform 0.15s; font-size: 13px; }
+.project-item:hover .project-arrow { transform: translateX(3px); }
+
+.exp-list { list-style: none; }
+.exp-item { padding: 20px 0; border-bottom: 1px solid var(--border); }
+.exp-item:first-child { border-top: 1px solid var(--border); }
+.exp-header { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 4px; flex-wrap: wrap; }
+.exp-role { font-family: var(--display); font-size: 17px; font-weight: 600; }
+.exp-date { font-family: var(--mono); font-size: 13px; color: var(--muted); flex-shrink: 0; }
+.exp-company { font-size: 14px; color: var(--accent); margin-bottom: 6px; }
+.exp-desc { font-size: 14px; color: var(--muted); line-height: 1.65; max-width: 600px; }
+
+.skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px; }
+.skill-block h3 { font-family: var(--display); font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+.skill-block p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+.edu-list { list-style: none; }
+.edu-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
+.edu-item:first-child { border-top: 1px solid var(--border); }
+.edu-header { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.edu-title { font-family: var(--display); font-size: 15px; font-weight: 600; }
+.edu-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.edu-school { font-size: 14px; color: var(--muted); }
+
+.contact { background: var(--ink); color: var(--white); padding: 56px 0 32px; }
+.contact h2 {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px;
+}
+.contact p { color: rgba(253, 252, 250, 0.55); font-size: 15px; margin-bottom: 28px; max-width: 460px; }
+.contact-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 48px; }
+.contact-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border: 1px solid rgba(253, 252, 250, 0.15);
+  border-radius: 8px; font-size: 14px; font-weight: 500;
+  color: var(--white); text-decoration: none; transition: border-color 0.15s;
+}
+.contact-link:hover { border-color: rgba(253, 252, 250, 0.4); }
+.contact-link svg { width: 15px; height: 15px; }
+.footer-note {
+  font-size: 12px; color: rgba(253, 252, 250, 0.25);
+  border-top: 1px solid rgba(253, 252, 250, 0.08); padding-top: 20px;
+}
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav.open .nav-links {
+    display: flex; flex-direction: column; position: absolute;
+    top: 52px; left: 0; right: 0; background: var(--bg);
+    padding: 16px 24px; border-bottom: 1px solid var(--border); z-index: 10;
+  }
+  .nav { position: relative; }
+  .hero { padding: 48px 0 40px; }
+  .project-top { flex-direction: column; gap: 2px; }
+  .project-tags { white-space: normal; }
+  .exp-header { flex-direction: column; gap: 2px; }
+  .skills-layout { grid-template-columns: 1fr; gap: 24px; }
+  .edu-header { flex-direction: column; gap: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar"></div>
+
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#" class="nav-name">Pedro Domingues</a>
+    <ul class="nav-links">
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#experiencia">Experiência</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#formacao">Formação</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+    </button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Pedro<br>Domingues</h1>
+    <p class="hero-bio">
+      Estudante de Ciência da Computação construindo coisas com <strong>IA</strong>, <strong>automação</strong> e <strong>código</strong>. Treinei modelos de IA generativa na Outlier, mantive bases de campanhas digitais na Paschoalotto, e hoje cuido de redes e infraestrutura na Vigos. Baseado em Bauru, SP — disponível para trabalho remoto. Fluente em inglês e português.
+    </p>
+    <div class="hero-contact">
+      <a href="mailto:pedromarquesmcd@hotmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        pedromarquesmcd@hotmail.com
+      </a>
+      <span class="sep"></span>
+      <a href="https://github.com/pedromcd" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <span class="sep"></span>
+      <a href="https://www.linkedin.com/in/pedro-domingues-/" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <span class="sep"></span>
+      <a href="tel:+5514991776864">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +55 14 99177-6864
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="projetos">
+  <div class="wrap">
+    <div class="section-head">Projetos</div>
+    <ul class="project-list">
+
+      <a href="https://github.com/pedromcd/copiloto-vendas-ia-agencia-web" target="_blank" class="project-item">
+        <div class="project-top">
+          <span class="project-name">Copiloto de Vendas com IA <span class="project-arrow">→</span></span>
+          <span class="project-tags">Python · IA · Web</span>
+        </div>
+        <div class="project-desc">Assistente de vendas com IA generativa para agência digital. Gestão de leads e interação com clientes.</div>
+      </a>
+
+      <a href="https://github.com/pedromcd/ai-leads-crm" target="_blank" class="project-item">
+        <div class="project-top">
+          <span class="project-name">CRM com IA para Leads <span class="project-arrow">→</span></span>
+          <span class="project-tags">JavaScript · IA · CRM</span>
+        </div>
+        <div class="project-desc">Sistema de CRM com scoring de leads por IA e automação de pipeline comercial.</div>
+      </a>
+
+      <a href="https://github.com/pedromcd/Controle-de-acesso-por-reconhecimento-facial" target="_blank" class="project-item">
+        <div class="project-top">
+          <span class="project-name">Controle de Acesso por Reconhecimento Facial <span class="project-arrow">→</span></span>
+          <span class="project-tags">Python · Visão Computacional</span>
+        </div>
+        <div class="project-desc">Sistema de reconhecimento facial em tempo real para controle de acesso.</div>
+      </a>
+
+      <a href="https://github.com/pedromcd/mini-compiler" target="_blank" class="project-item">
+        <div class="project-top">
+          <span class="project-name">Mini Compilador <span class="project-arrow">→</span></span>
+          <span class="project-tags">Python · Compiladores</span>
+        </div>
+        <div class="project-desc">Implementação de compilador com análise léxica, parsing e geração de código.</div>
+      </a>
+
+      <a href="https://github.com/pedromcd/Artist-hiring-app" target="_blank" class="project-item">
+        <div class="project-top">
+          <span class="project-name">Plataforma de Contratação de Artistas <span class="project-arrow">→</span></span>
+          <span class="project-tags">Python · Full-Stack</span>
+        </div>
+        <div class="project-desc">Aplicação web para conectar clientes e artistas. Autenticação, perfis e agendamento.</div>
+      </a>
+
+      <a href="https://github.com/pedromcd/appMaterna" target="_blank" class="project-item">
+        <div class="project-top">
+          <span class="project-name">appMaterna <span class="project-arrow">→</span></span>
+          <span class="project-tags">JavaScript · Saúde</span>
+        </div>
+        <div class="project-desc">Aplicação mobile-first de apoio à saúde materna com acompanhamento gestacional.</div>
+      </a>
+
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="experiencia">
+  <div class="wrap">
+    <div class="section-head">Experiência</div>
+    <ul class="exp-list">
+
+      <li class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Técnico de Suporte em TI</span>
+          <span class="exp-date">Mar 2026 — Atual</span>
+        </div>
+        <div class="exp-company">Vigos Soluções em Telecomunicações, Bauru</div>
+        <div class="exp-desc">Suporte via help desk e visitas técnicas. Manutenção e configuração de computadores, roteadores e switches. Treinamento e avaliação de modelos de IA.</div>
+      </li>
+
+      <li class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Coding Expert — Latam Coder</span>
+          <span class="exp-date">Jul — Nov 2025</span>
+        </div>
+        <div class="exp-company">Outlier AI, Remoto</div>
+        <div class="exp-desc">Treinamento e avaliação de modelos de IA generativa. Engenharia de prompts com foco em precisão e consistência. Debugging e melhoria de código em projetos de desenvolvimento.</div>
+      </li>
+
+      <li class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Estagiário → Assistente de Soluções Digitais</span>
+          <span class="exp-date">Jul 2024 — Mar 2025</span>
+        </div>
+        <div class="exp-company">Paschoalotto, Bauru</div>
+        <div class="exp-desc">Acompanhamento de indicadores e suporte ao time de planejamento digital na criação, disparo e manutenção de campanhas de SMS, e-mail marketing e agente virtual.</div>
+      </li>
+
+      <li class="exp-item">
+        <div class="exp-header">
+          <span class="exp-role">Estagiário de Marketing Digital</span>
+          <span class="exp-date">Ago — Dez 2023</span>
+        </div>
+        <div class="exp-company">Hack Sales Performance, Bauru</div>
+        <div class="exp-desc">Estruturação de campanhas no Google e Meta. Auditorias de SEO, análise de indexação e dashboards de performance.</div>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<section class="section" id="habilidades">
+  <div class="wrap">
+    <div class="section-head">Habilidades</div>
+    <div class="skills-layout">
+      <div class="skill-block">
+        <h3>Linguagens</h3>
+        <p>Python, JavaScript, Java, SQL, HTML, CSS.</p>
+      </div>
+      <div class="skill-block">
+        <h3>Frontend</h3>
+        <p>React, design responsivo, arquitetura baseada em componentes.</p>
+      </div>
+      <div class="skill-block">
+        <h3>IA & Dados</h3>
+        <p>Treinamento e avaliação de modelos, engenharia de prompts, visão computacional, análise de dados.</p>
+      </div>
+      <div class="skill-block">
+        <h3>Ferramentas & Infraestrutura</h3>
+        <p>Git, REST APIs, cloud computing, RPA, automação com N8N, MySQL, configuração de redes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="formacao">
+  <div class="wrap">
+    <div class="section-head">Formação Acadêmica</div>
+    <ul class="edu-list">
+      <li class="edu-item">
+        <div class="edu-header">
+          <span class="edu-title">Bacharelado em Ciência da Computação</span>
+          <span class="edu-date">2023 — 2026</span>
+        </div>
+        <div class="edu-school">UNISAGRADO, Bauru</div>
+      </li>
+      <li class="edu-item">
+        <div class="edu-header">
+          <span class="edu-title">Técnico em Eletromecânica</span>
+          <span class="edu-date">2021 — 2023</span>
+        </div>
+        <div class="edu-school">SENAI, Bauru</div>
+      </li>
+      <li class="edu-item">
+        <div class="edu-header">
+          <span class="edu-title">CS50x — Introdução à Ciência da Computação</span>
+          <span class="edu-date">70h</span>
+        </div>
+        <div class="edu-school">Harvard University, Online</div>
+      </li>
+      <li class="edu-item">
+        <div class="edu-header">
+          <span class="edu-title">Programador Web</span>
+          <span class="edu-date">200h</span>
+        </div>
+        <div class="edu-school">IFRS, Online</div>
+      </li>
+    </ul>
+
+    <div style="margin-top: 40px;">
+      <div class="section-head">Certificações</div>
+      <ul class="edu-list">
+        <li class="edu-item">
+          <div class="edu-title" style="font-size: 14px;">Defesa de Rede — Fatec / Cisco Networking Academy</div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-title" style="font-size: 14px;">Fundamentos de Engenharia de Dados — Data Science Academy</div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-title" style="font-size: 14px;">JavaScript do Básico ao Avançado com Node.js — Udemy</div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-title" style="font-size: 14px;">Automação com N8N — Santander 2025 / DIO</div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-title" style="font-size: 14px;">Projeto de Extensão: Fábrica de Software — UNISAGRADO (40h)</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contato">
+  <div class="wrap">
+    <h2>Vamos trabalhar juntos.</h2>
+    <p>Buscando oportunidades remotas em IA, automação e desenvolvimento de software. Fluente em inglês e português.</p>
+    <div class="contact-row">
+      <a href="mailto:pedromarquesmcd@hotmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        Email
+      </a>
+      <a href="https://github.com/pedromcd" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/pedro-domingues-/" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="footer-note">&copy; 2026 Pedro Marques Correa Domingues</div>
+  </div>
+</section>
+
+<script>
+document.querySelectorAll('.nav-links a').forEach(a =>
+  a.addEventListener('click', () => document.getElementById('nav').classList.remove('open'))
+);
+</script>
+
+</body>
+</html>
