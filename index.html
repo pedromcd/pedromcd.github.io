@@ -26,16 +26,21 @@ body{background:var(--bg);color:var(--ink)}.topbar{height:3px;background:var(--a
 .hero{background:var(--hero);padding:90px 0 82px}.hero::after{content:'✳';width:auto;height:auto;right:max(20px,calc((100vw - 1200px)/2));top:44px;border:0;border-radius:0;box-shadow:none;color:var(--accent);opacity:.22;font:300 clamp(160px,24vw,350px)/1 var(--display);transform:rotate(-13deg)}.eyebrow{color:var(--accent);text-transform:none;letter-spacing:.02em;font-family:var(--body);font-weight:700;font-size:13px}.eyebrow::before{display:none}.hero h1{max-width:940px;font-size:clamp(42px,6.7vw,78px);letter-spacing:-.045em}.hero h1 .highlight{color:var(--accent)}.hero-bio{color:var(--muted)}.hero-bio strong{color:var(--ink)}
 .hero-stack span,.skill-block p span{background:var(--chip);border-color:var(--chip-border);color:var(--ink);font-family:var(--body);font-size:13px}.hero-contact a{background:var(--surface);border-color:var(--border);color:var(--ink)}.hero-contact a:first-child{background:var(--ink);border-color:var(--ink);color:var(--bg)}.hero-contact a:hover{border-color:var(--accent)}.section{border-color:var(--border)}.section-head::before{content:'';display:inline-block;width:22px;height:3px;margin-right:12px;vertical-align:middle;background:var(--accent)}
 .project-filters button{border-color:var(--border);color:var(--muted)}.project-filters button:hover,.project-filters button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--bg)}.project-item,.project-item:first-child{background:var(--surface);border-color:var(--border)}.project-item:first-child{background:var(--surface2);border-color:var(--chip-border)}.project-item:hover{border-color:var(--accent);box-shadow:0 16px 35px var(--shadow)}.project-arrow,.project-tags,.exp-company{color:var(--accent)}.project-desc,.exp-desc,.exp-date,.edu-date,.edu-school{color:var(--muted)}.exp-item,.edu-item{border-color:var(--border)}.skill-block{background:var(--surface);border-color:var(--border)}.contact{background:var(--hero);border-color:var(--border);color:var(--ink)}.contact p,.footer-note{color:var(--muted)}.contact-link{border-color:var(--border);color:var(--ink)}.contact-link:hover{background:var(--surface2)}.footer-note{border-color:var(--border)}
-.theme-curtain{position:fixed;inset:0;z-index:1000;background:var(--curtain);transform:scaleY(0);transform-origin:top;pointer-events:none}.theme-curtain.is-covering{transform:scaleY(1);transition:transform .42s cubic-bezier(.65,0,.35,1)}.theme-curtain.is-revealing{transform-origin:bottom;transform:scaleY(0);transition:transform .42s cubic-bezier(.65,0,.35,1)}
+/* One sweep reveals the new page without covering and uncovering it twice. */
+::view-transition-old(root){animation:none}
+::view-transition-new(root){animation-duration:.7s;animation-timing-function:cubic-bezier(.65,0,.25,1);animation-fill-mode:both}
+html.wipe-ltr::view-transition-new(root){animation-name:wipe-left-to-right}
+html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
+@keyframes wipe-left-to-right{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes wipe-right-to-left{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}
 @media(max-width:760px){.nav.open .nav-links{background:var(--bg);border-color:var(--border)}.hero::after{right:-35px;top:20px;opacity:.11}.hero{padding:64px 0}.nav .wrap{gap:8px}.nav-name{max-width:48%;line-height:1.2}.nav-actions{gap:6px}}
 @media(max-width:420px){.theme-toggle{padding:8px}.theme-label{display:none}.nav-name{font-size:12px}.hero h1{font-size:41px}}
-@media(prefers-reduced-motion:reduce){.theme-curtain{display:none}.theme-toggle{transition:none}}
+@media(prefers-reduced-motion:reduce){::view-transition-new(root){animation:none}.theme-toggle{transition:none}}
 </style>
 </head>
 <body>
 
 <div class="topbar"></div>
-<div class="theme-curtain" aria-hidden="true"></div>
 
 <nav class="nav" id="nav">
   <div class="wrap">
@@ -298,7 +303,6 @@ const THEME_LABEL_DARK = "Switch to dark mode";
 const THEME_TEXT_LIGHT = "Light mode";
 const THEME_TEXT_DARK = "Dark mode";
 const themeButton = document.querySelector('.theme-toggle');
-const curtain = document.querySelector('.theme-curtain');
 let themeChanging = false;
 function updateThemeButton() {
   const dark = document.documentElement.dataset.theme === 'dark';
@@ -313,26 +317,24 @@ function setTheme(theme) {
   updateThemeButton();
 }
 updateThemeButton();
-themeButton.addEventListener('click', () => {
+themeButton.addEventListener('click', async () => {
   if (themeChanging) return;
   const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     setTheme(next);
     return;
   }
   themeChanging = true;
   themeButton.disabled = true;
-  curtain.classList.add('is-covering');
-  curtain.addEventListener('transitionend', () => {
-    setTheme(next);
-    curtain.classList.remove('is-covering');
-    curtain.classList.add('is-revealing');
-    curtain.addEventListener('transitionend', () => {
-      curtain.classList.remove('is-revealing');
-      themeButton.disabled = false;
-      themeChanging = false;
-    }, { once: true });
-  }, { once: true });
+  const direction = next === 'dark' ? 'wipe-ltr' : 'wipe-rtl';
+  document.documentElement.classList.add(direction);
+  try {
+    await document.startViewTransition(() => setTheme(next)).finished;
+  } finally {
+    document.documentElement.classList.remove(direction);
+    themeButton.disabled = false;
+    themeChanging = false;
+  }
 });
 
 const nav = document.getElementById('nav');
