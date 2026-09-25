@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#f8f6f0">
 <script>try { if (localStorage.getItem("portfolio-theme") === "dark") document.documentElement.dataset.theme = "dark"; } catch (_) {}</script>
-<title>Pedro Marques Correa Domingues | Developer & AI</title>
-<meta name="description" content="Computer Science student. AI, automation, and full-stack development.">
+<title>Pedro Marques Correa Domingues | AI & Software Development</title>
+<meta name="description" content="Computer Science undergraduate working with AI systems, RAG, LLM evaluation, automation, and full-stack development.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;1,400&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -47,6 +47,7 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
     <a href="#" class="nav-name">Pedro Marques Correa Domingues</a>
     <ul class="nav-links" id="nav-links">
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#research">Research</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#education">Education</a></li>
@@ -62,10 +63,10 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
 
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">Development · AI · Automation</p>
+    <p class="eyebrow">AI · Software Development · Research</p>
     <h1>Pedro Marques<br><span class="highlight">Correa Domingues.</span></h1>
-    <p class="hero-bio">I build <strong>full-stack</strong> applications and solutions that connect <strong>AI</strong>, <strong>automation</strong>, and real problems. I work across interfaces, integrations, and infrastructure, with a focus on user experience and code quality. Computer Science student based in Bauru, Brazil, fluent in Portuguese and English and open to remote work.</p>
-    <div class="hero-stack" aria-label="Core technologies"><span>Python</span><span>JavaScript</span><span>React</span><span>FastAPI</span><span>SQL</span><span>Docker</span><span>n8n</span></div>
+    <p class="hero-bio">I build <strong>software and applied AI systems</strong> with experience in <strong>production RAG pipelines</strong>, knowledge bases, LLM evaluation, automation, and full-stack development. I am completing a B.Sc. in Computer Science in Brazil and preparing for graduate study in AI/ML, with interests in information retrieval, NLP, reliable LLM systems, and intelligent software systems.</p>
+    <div class="hero-stack" aria-label="Core technologies"><span>Python</span><span>RAG</span><span>LLM Evaluation</span><span>React</span><span>FastAPI</span><span>SQL</span><span>Docker</span><span>n8n</span></div>
     <div class="hero-contact">
       <a href="mailto:pedromarquesmcd@hotmail.com">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -93,7 +94,7 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
 <section class="section" id="projects">
   <div class="wrap">
     <div class="section-head">Projects</div>
-    <div class="project-filters" role="group" aria-label="Filter projects"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="ai" aria-pressed="false">IA</button><button type="button" data-filter="web" aria-pressed="false">Web</button><button type="button" data-filter="cv" aria-pressed="false">Computer vision</button></div>
+    <div class="project-filters" role="group" aria-label="Filter projects"><button type="button" data-filter="all" aria-pressed="true">All</button><button type="button" data-filter="ai" aria-pressed="false">AI</button><button type="button" data-filter="web" aria-pressed="false">Web</button><button type="button" data-filter="cv" aria-pressed="false">Computer vision</button></div>
     <div class="project-list">
 
       <a href="https://github.com/pedromcd/NutriAI" target="_blank" rel="noopener noreferrer" data-category="ai web" class="project-item">
@@ -101,7 +102,7 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
           <span class="project-name">NutriAI <span class="project-arrow">→</span></span>
           <span class="project-tags">React · TypeScript · Firebase · Gemini</span>
         </div>
-        <div class="project-desc">Web app using AI to suggest personalized meal plans and recipes, with authentication and data storage.</div>
+        <div class="project-desc">AI-assisted nutrition platform integrating Gemini with structured user context, Firebase persistence, and a tested TypeScript service layer.</div>
       </a>
 
       <a href="https://github.com/pedromcd/ai-leads-crm" target="_blank" data-category="ai web" class="project-item">
@@ -109,7 +110,7 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
           <span class="project-name">AI Leads CRM <span class="project-arrow">→</span></span>
           <span class="project-tags">JavaScript · AI · CRM</span>
         </div>
-        <div class="project-desc">CRM with AI-driven lead scoring and pipeline automation for sales workflows.</div>
+        <div class="project-desc">End-to-end LLM workflow that turns inbound leads into validated structured outputs using n8n, FastAPI, OpenRouter, and SQLite.</div>
       </a>
 
       <a href="https://github.com/pedromcd/Controle-de-acesso-por-reconhecimento-facial" target="_blank" data-category="cv ai" class="project-item">
@@ -117,7 +118,7 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
           <span class="project-name">Facial Recognition Access Control <span class="project-arrow">→</span></span>
           <span class="project-tags">Python · CV · Security</span>
         </div>
-        <div class="project-desc">Real-time facial recognition system for access control using computer vision.</div>
+        <div class="project-desc">Real-time computer-vision pipeline using ArcFace embeddings, similarity matching, configurable thresholds, and SQLite persistence.</div>
       </a>
 
       <a href="https://github.com/pedromcd/mini-compiler" target="_blank" data-category="other" class="project-item">
@@ -136,6 +137,31 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
         <div class="project-desc">Web application connecting clients with artists. Authentication, profiles, and booking.</div>
       </a>
 
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="research">
+  <div class="wrap">
+    <div class="section-head">Research Interests</div>
+    <div class="skills-layout">
+      <div class="skill-block">
+        <h3>Information Retrieval & RAG</h3>
+        <div class="exp-desc">Retrieval pipelines, grounding, knowledge-base quality, chunking strategies, and evaluation of retrieved context.</div>
+      </div>
+      <div class="skill-block">
+        <h3>NLP & LLM Systems</h3>
+        <div class="exp-desc">Reliable LLM applications, structured outputs, prompt design, model behavior, and integration of language models into software systems.</div>
+      </div>
+      <div class="skill-block">
+        <h3>Model Evaluation</h3>
+        <div class="exp-desc">Testing model quality, consistency, failure modes, hallucination reduction, and practical evaluation of AI systems.</div>
+      </div>
+      <div class="skill-block">
+        <h3>Intelligent Software Systems</h3>
+        <div class="exp-desc">Applied AI combined with software engineering, automation, APIs, and production-oriented system design.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -160,7 +186,7 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
           <span class="exp-date">Mar 2026 - Aug 6, 2026</span>
         </div>
         <div class="exp-company">Vigos Soluções em Telecomunicações, Bauru</div>
-        <div class="exp-desc">Help desk support and on-site troubleshooting. Maintaining and configuring computers, routers, and network switches. Training and evaluating AI models.</div>
+        <div class="exp-desc">Maintained and updated a production RAG knowledge base, tested new models and a redesigned RAG pipeline in staging, integrated AI workflows into Chatwoot, and supported production changes alongside IT troubleshooting.</div>
       </li>
 
       <li class="exp-item">
@@ -208,11 +234,11 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
       </div>
       <div class="skill-block">
         <h3>AI & Data</h3>
-        <p><span>Model training and evaluation</span><span>prompt engineering</span><span>computer vision</span><span>data analysis</span></p>
+        <p><span>RAG</span><span>LLM evaluation</span><span>information retrieval</span><span>prompt engineering</span><span>knowledge bases</span><span>computer vision</span></p>
       </div>
       <div class="skill-block">
-        <h3>Tools & Infrastructure</h3>
-        <p><span>Git</span><span>REST APIs</span><span>cloud computing</span><span>RPA</span><span>N8N automation</span><span>MySQL</span><span>network configuration</span></p>
+        <h3>Backend, Automation & Infrastructure</h3>
+        <p><span>FastAPI</span><span>REST APIs</span><span>Git</span><span>Docker</span><span>n8n</span><span>MySQL</span><span>PostgreSQL</span><span>RPA</span></p>
       </div>
     </div>
   </div>
@@ -278,7 +304,7 @@ html.wipe-rtl::view-transition-new(root){animation-name:wipe-right-to-left}
 <section class="contact" id="contact">
   <div class="wrap">
     <h2>Let's work together.</h2>
-    <p>Open to remote opportunities in development, AI, and automation. Fluent in English and Portuguese.</p>
+    <p>Open to remote opportunities in development, AI, and automation, as well as graduate research collaborations in applied AI. Fluent in English and Portuguese.</p>
     <div class="contact-row">
       <a href="mailto:pedromarquesmcd@hotmail.com" class="contact-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
